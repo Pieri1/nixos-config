@@ -10,6 +10,7 @@
                 ./modules/desktop/mako.nix
                 ./modules/desktop/kitty.nix
                 ./modules/desktop/brave.nix
+                ./modules/desktop/waybar.nix
         ];
 
 	home.username = "pieri";
@@ -29,7 +30,9 @@
 		curl
 		htop
 		btop
-		unzip
+                unzip
+                nerd-fonts.jetbrains-mono
+                font-awesome
 	];
 
 	programs.home-manager.enable = true;

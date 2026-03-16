@@ -66,6 +66,10 @@
         ];
       };
 
+      monitor = [
+        ", 1920x1080@60, 0x0, 1"
+      ];
+
       exec-once = [
         "swww init"
         "swww img ~/nixos-config/images/wallpaper1.jpg"
