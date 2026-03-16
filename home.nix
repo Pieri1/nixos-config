@@ -7,6 +7,8 @@
 		./modules/shell/nvim.nix
                 ./modules/shell/starship.nix
                 ./modules/desktop/hyprland.nix
+                ./modules/desktop/mako.nix
+                ./modules/desktop/kitty.nix
 	];
 
 	home.username = "pieri";
