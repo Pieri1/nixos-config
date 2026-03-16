@@ -66,8 +66,6 @@
   # $ nix search wget
 
   environment.systemPackages = with pkgs; [
-    neovim
-    git
     curl
     wget
   ];

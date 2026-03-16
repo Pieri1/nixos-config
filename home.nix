@@ -4,6 +4,8 @@
 	imports = [
 		./modules/shell/zsh.nix
 		./modules/shell/git.nix
+		./modules/shell/nvim.nix
+		./modules/shell/starship.nix
 	];
 
 	home.username = "pieri";
@@ -13,9 +15,7 @@
 	# Pacotes
 	home.packages = with pkgs; [
 		brave
-		neovim
 		wget
-		git
 		curl
 		htop
 		btop
