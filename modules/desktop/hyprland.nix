@@ -20,6 +20,16 @@
         "$mainMod, down, movefocus, d"
       ];
 
+      input = {
+        kb_layout = "br";
+        kb_variant = "";
+        kb_model = "pc105";
+        follow_mouse = 1;
+        touchpad = {
+          natural_scroll = true;
+        };
+      };
+
       general = {
         gaps_in = 5;
         gaps_out = 10;
