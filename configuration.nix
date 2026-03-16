@@ -52,6 +52,17 @@
 
   # Habilita binario
   programs.zsh.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pieri = {
