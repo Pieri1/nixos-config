@@ -9,7 +9,8 @@
                 ./modules/desktop/hyprland.nix
                 ./modules/desktop/mako.nix
                 ./modules/desktop/kitty.nix
-	];
+                ./modules/desktop/brave.nix
+        ];
 
 	home.username = "pieri";
 	home.homeDirectory = "/home/pieri";
@@ -23,7 +24,7 @@
                 swww # Papel de parede
                 libnotify # Notificações
                 mako # Servidor de notificações
-		brave
+                kdePackages.dolphin # Gerenciador de arquivos
 		wget
 		curl
 		htop
