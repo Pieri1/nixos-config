@@ -40,6 +40,9 @@
         "$mainMod SHIFT, 0, movetoworkspace, 10"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+        ", XF86AudioLowerVolume, exec, pamixer -d 5"
+        ", XF86AudioMute, exec, paximer -t"
       ];
 
       input = {
@@ -92,11 +95,26 @@
         ", 1920x1080@60, 0x0, 1"
       ];
 
+      windowrulev2 = [
+        # Faz as janelas de configuração flutuarem
+        "float, class:(org.pulseaudio.pavucontrol)"
+        "float, class:(nm-connection-editor)"
+        "float, class:(waypaper)"
+        # Define um tamanho padrão para elas
+        "size 700 500, class:(org.pulseaudio.pavucontrol)"
+        "size 600 500, class:(nm-connection-editor)"
+        "size 900 600, class:(waypaper)"
+        # Centraliza na tela
+        "center, class:(org.pulseaudio.pavucontrol)"
+        "center, class:(nm-connection-editor)"
+        "center, class:(waypaper)"
+      ];
+
       exec-once = [
-        "swww init"
-        "swww img ~/nixos-config/images/wallpaper1.jpg"
-        "waybar"
-        "mako"
+        "swww init" #Inicia motor de wallpaper
+        "nm-applet --indicator" #Ícone de rede na bandeja
+        "swaync" # Inicia centro de notificação
+        "waybar" # Inicia a barra
       ];
     };
   };

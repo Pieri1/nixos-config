@@ -8,27 +8,59 @@
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = [ "hyprland/workspaces" "hyprland/mode" ];
+        spacing = 4;
+
+        modules-left = [ "hyprland/workspaces"];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "pulseaudio" "network" "cpu" "memory" "baterry" "clock" "tray" ];
+        modules-right = [ "custom/wallpaper" "pulseaudio" "network" "baterry" "clock" "custom/settings" ];
+
         "hyprland/workspaces" = {
-          format = "{icon}";
           on-click = "activate";
+          format = "{name}";
+          active-only = false;
+          persistent-workspaces = {
+            "*" = 5;
+          };
         };
+
         "clock" = {
-          format = "\uf017 {:%H:%M}";
+          format = "<span color='#89b4fa'>\uf017</span> {:%H:%M}";
           tooltip-format = "<big>{:%Y %B}</big>/n<tt><small>{calendar}</small></tt>";
         };
+
         "baterry" = {
+          states = {
+            warning = 30;
+            critical = 15;
+          };
           format = "{icon} {capacity}%";
           format-icons = [ "\uf244" "\uf243" "\uf242" "\uf241" "\uf240" ];
         };
+
+        "network" = {
+          format-wifi = "\uf1eb {essid}";
+          format-disconnected = "\uf071 Desconectado";
+          on-click = "nm-connection-editor";
+        };
+
         "pulseaudio" = {
           format = "{icon} {volume}%";
           format-icons = {
             default = [ "\uf026" "\uf027" "\uf028" ];
           };
-          on-click = "pabucontrol";
+          on-click = "pavucontrol";
+        };
+
+        "custom/wallpaper" = {
+          format = "\uf03e";
+          on-click = "waypaper";
+          tooltip = false;
+        };
+
+        "custom/settings" = {
+          format = "\uf013";
+          on-click = "swaync-client -t -sw";
+          tooltip = false;
         };
       };
     };
@@ -36,7 +68,9 @@
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 13px;
+        font-size: 14px;
+        border: none;
+        border-radius: 0;
       }
       window#waybar {
         background: rgba(30, 30, 46, 0.9);
@@ -44,10 +78,15 @@
         border-bottom: 2px solid #89b4fa
       }
       #workspaces button {
+        padding: 0 5px;
         color: #89b4fa
       }
       #workspaces button.active {
         color: #f5c2e7
+        background-color: #313244;
+      }
+      #clock, #baterry, #network, #pulseaudio, #custom-wallpaper, #custom-settings{
+        padding: 0 10px;
       }
     '';
   };
