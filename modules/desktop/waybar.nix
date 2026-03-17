@@ -12,7 +12,7 @@
 
         modules-left = [ "hyprland/workspaces"];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "custom/wallpaper" "pulseaudio" "network" "baterry" "clock" "custom/settings" ];
+        modules-right = [ "custom/wallpaper" "pulseaudio" "network" "battery" "clock" "custom/settings" ];
 
         "hyprland/workspaces" = {
           on-click = "activate";
@@ -24,41 +24,41 @@
         };
 
         "clock" = {
-          format = "<span color='#89b4fa'>\uf017</span> {:%H:%M}";
+          format = "${"\\uf017"} {:%H:%M}";
           tooltip-format = "<big>{:%Y %B}</big>/n<tt><small>{calendar}</small></tt>";
         };
 
-        "baterry" = {
+        "battery" = {
           states = {
             warning = 30;
             critical = 15;
           };
           format = "{icon} {capacity}%";
-          format-icons = [ "\uf244" "\uf243" "\uf242" "\uf241" "\uf240" ];
+          format-icons = [ "${"\\uf244"}" "${"\\uf243"}" "${"\\uf242"}" "${"\\uf241"}" "${"\\uf240"}" ];
         };
 
         "network" = {
-          format-wifi = "\uf1eb {essid}";
-          format-disconnected = "\uf071 Desconectado";
+          format-wifi = "${"\\uf1eb"} {essid}";
+          format-disconnected = "${"\\uf071"} Desconectado";
           on-click = "nm-connection-editor";
         };
 
         "pulseaudio" = {
           format = "{icon} {volume}%";
           format-icons = {
-            default = [ "\uf026" "\uf027" "\uf028" ];
+            default = [ "${"\\uf026"}" "${"\\uf027"}" "${"\\uf028"}" ];
           };
           on-click = "pavucontrol";
         };
 
         "custom/wallpaper" = {
-          format = "\uf03e";
+          format = "${"\\uf03e"}";
           on-click = "waypaper";
           tooltip = false;
         };
 
         "custom/settings" = {
-          format = "\uf013";
+          format = "${"\\uf013"}";
           on-click = "swaync-client -t -sw";
           tooltip = false;
         };
@@ -75,14 +75,14 @@
       window#waybar {
         background: rgba(30, 30, 46, 0.9);
         color: #cdd6f4;
-        border-bottom: 2px solid #89b4fa
+        border-bottom: 2px solid #89b4fa;
       }
       #workspaces button {
         padding: 0 5px;
-        color: #89b4fa
+        color: #89b4fa;
       }
       #workspaces button.active {
-        color: #f5c2e7
+        color: #f5c2e7;
         background-color: #313244;
       }
       #clock, #baterry, #network, #pulseaudio, #custom-wallpaper, #custom-settings{
