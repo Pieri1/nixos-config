@@ -17,7 +17,10 @@
 			specialArgs = { inherit inputs; };
 			modules = [
 				# Configuration.nix
-				./configuration.nix
+                                ./configuration.nix
+                                {
+                                  nixpkgs.config.allowUnfree = true;
+                                }
 
 				# Home Manager como modulo
 				home-manager.nixosModules.home-manager

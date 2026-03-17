@@ -12,11 +12,14 @@
                 ./modules/desktop/waybar.nix
                 ./modules/desktop/swaync.nix
                 ./modules/desktop/discord.nix
+                ./modules/desktop/vscode.nix
         ];
 
 	home.username = "pieri";
 	home.homeDirectory = "/home/pieri";
         home.stateVersion = "24.11";
+        
+        nixpkgs.config.allowUnfree = true;
 
         services.swaync = {
           enable = true;
@@ -41,6 +44,7 @@
                 xdg-desktop-portal-hyprland
                 grimblast # Para prints e captura de tela rápida
                 numlockx
+                nil #Servidor de linguagem pra nix
 
                 # Som
                 pavucontrol # Interface de áudio (Mixer)
