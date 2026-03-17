@@ -11,6 +11,7 @@
                 ./modules/desktop/brave.nix
                 ./modules/desktop/waybar.nix
                 ./modules/desktop/swaync.nix
+                ./modules/desktop/discord.nix
         ];
 
 	home.username = "pieri";
@@ -37,6 +38,9 @@
                 nerd-fonts.symbols-only
                 noto-fonts-color-emoji
                 font-awesome
+                xdg-desktop-portal-hyprland
+                grimblast # Para prints e captura de tela rápida
+                numlockx
 
                 # Som
                 pavucontrol # Interface de áudio (Mixer)

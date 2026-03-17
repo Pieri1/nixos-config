@@ -43,6 +43,11 @@
         ", XF86AudioRaiseVolume, exec, pamixer -i 5"
         ", XF86AudioLowerVolume, exec, pamixer -d 5"
         ", XF86AudioMute, exec, paximer -t"
+        "$mainMod, D, togglespecialworkspace, discord"
+      ];
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
       ];
 
       input = {
@@ -50,6 +55,7 @@
         kb_variant = "";
         kb_model = "pc105";
         follow_mouse = 1;
+        numlock_by_default = true;
         touchpad = {
           natural_scroll = true;
         };
@@ -95,6 +101,16 @@
         ", 1920x1080@60, 0x0, 1"
       ];
 
+      dwindle = {
+        pseudotile = true; # Mantém o tamanho original das janelas flutuantes
+        preserve_split = true; # Mantém a divisão da janela mesmo se você fechar
+      };
+
+      master = {
+        new_status = "master"; # Novas janelas viram a janela principal
+        mfact = 0.5; # Divide a tela exatamente no meio (50%)
+      };
+
       windowrulev2 = [
         # Faz as janelas de configuração flutuarem
         "float, class:(org.pulseaudio.pavucontrol)"
@@ -108,13 +124,19 @@
         "center, class:(org.pulseaudio.pavucontrol)"
         "center, class:(nm-connection-editor)"
         "center, class:(waypaper)"
+        # Vesktop special workspace
+        "workspace special:discord, class:(vesktop)"
+        "size 80% 85%, class:(vesktop)"
+        "center, class:(vesktop)"
       ];
 
       exec-once = [
-        "swww init" #Inicia motor de wallpaper
+        "swww-daemon" #Inicia motor de wallpaper
         "nm-applet --indicator" #Ícone de rede na bandeja
         "swaync" # Inicia centro de notificação
         "waybar" # Inicia a barra
+        "numlockx on"
+        "sleep 10 && vesktop --start-minimized"
       ];
     };
   };
