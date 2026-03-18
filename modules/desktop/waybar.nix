@@ -24,7 +24,7 @@
         };
 
         "clock" = {
-          format = "${"\\uf017"} {:%H:%M}";
+          format = "{:%H:%M}";
           tooltip-format = "<big>{:%Y %B}</big>/n<tt><small>{calendar}</small></tt>";
         };
 
@@ -34,31 +34,31 @@
             critical = 15;
           };
           format = "{icon} {capacity}%";
-          format-icons = [ "${"\\uf244"}" "${"\\uf243"}" "${"\\uf242"}" "${"\\uf241"}" "${"\\uf240"}" ];
+          format-icons = [ "Bateria:" ];
         };
 
         "network" = {
-          format-wifi = "${"\\uf1eb"} {essid}";
-          format-disconnected = "${"\\uf071"} Desconectado";
+          format-wifi = "WiFi {essid}";
+          format-disconnected = "WiFi Desconectado";
           on-click = "nm-connection-editor";
         };
 
         "pulseaudio" = {
           format = "{icon} {volume}%";
           format-icons = {
-            default = [ "${"\\uf026"}" "${"\\uf027"}" "${"\\uf028"}" ];
+            default = [ "Som: "];
           };
           on-click = "pavucontrol";
         };
 
         "custom/wallpaper" = {
-          format = "${"\\uf03e"}";
+          format = "Wallpaper";
           on-click = "waypaper";
           tooltip = false;
         };
 
         "custom/settings" = {
-          format = "${"\\uf013"}";
+          format = "Configurações";
           on-click = "swaync-client -t -sw";
           tooltip = false;
         };
