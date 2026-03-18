@@ -1,10 +1,34 @@
 { config, pkgs, ... }:
 
+let
+  handle_lid = pkgs.writeShellScriptBin "handle_lid" ''
+    LOG_FILE="/tmp/hypr_lid_history.log"
+    STATE_FILE="/tmp/hypr_lid_state"
+
+    if [ "$1" == "close" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Evento: Tampa Fechada" >> "$LOG_FILE"
+        echo "closed" > "$STATE_FILE"
+        
+        # Desativa o notebook e força o Workspace 1 no HDMI
+        ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1, disable"
+        ${pkgs.hyprland}/bin/hyprctl dispatch moveworkspacetomonitor 1 HDMI-A-1
+        ${pkgs.hyprland}/bin/hyprctl dispatch focusmonitor HDMI-A-1
+        
+    elif [ "$1" == "open" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Evento: Tampa Aberta" >> "$LOG_FILE"
+        echo "open" > "$STATE_FILE"
+        
+        # Reativa o notebook e devolve a autonomia
+        ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1, preferred, auto, 1"
+    fi
+  '';
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       "$mainMod" = "SUPER";
+      
       bind = [
         "$mainMod, Q, exec, kitty"
         "$mainMod, C, killactive,"
@@ -42,24 +66,47 @@
         "$mainMod, mouse_up, workspace, e-1"
         ", XF86AudioRaiseVolume, exec, pamixer -i 5"
         ", XF86AudioLowerVolume, exec, pamixer -d 5"
-        ", XF86AudioMute, exec, paximer -t"
+        ", XF86AudioMute, exec, pamixer -t" # Corrigido o erro de digitação 'paximer'
         "$mainMod, D, togglespecialworkspace, discord"
       ];
+
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      # Gatilhos de Hardware (Lid Switch)
+      bindl = [
+        # switch:on = Tampa Fechada (State 1)
+        ", switch:on:Lid Switch, exec, ${handle_lid}/bin/handle_lid close"
+        # switch:off = Tampa Aberta (State 0)
+        ", switch:off:Lid Switch, exec, ${handle_lid}/bin/handle_lid open"
+      ];
+
       input = {
         kb_layout = "br";
-        kb_variant = "";
-        kb_model = "pc105";
         follow_mouse = 1;
+        mouse_refocus = true;
         numlock_by_default = true;
-        touchpad = {
-          natural_scroll = true;
-        };
+        touchpad.natural_scroll = true;
       };
+
+      monitor = [
+        "HDMI-A-1, preferred, 0x0, 1"
+        "eDP-1, preferred, auto, 1"
+      ];
+
+      workspace = [
+        # Garante que o monitor HDMI seja o "foco" inicial de criação
+        "monitor:HDMI-A-1, default:true"
+        
+        # Vincula explicitamente os fujões
+        "1, monitor:HDMI-A-1, default:true"
+        "2, monitor:HDMI-A-1, default:true"
+        "3, monitor:HDMI-A-1"
+        "4, monitor:HDMI-A-1"
+        "5, monitor:HDMI-A-1"
+      ];
 
       general = {
         gaps_in = 6;
@@ -78,7 +125,7 @@
           render_power = 3;
           color = "rgba(1a1a1eee)";
         };
-        blur  = {
+        blur = {
           enabled = true;
           size = 5;
           passes = 2;
@@ -97,47 +144,58 @@
         ];
       };
 
-      monitor = [
-        ", 1920x1080@60, 0x0, 1"
-      ];
-
-      dwindle = {
-        pseudotile = true; # Mantém o tamanho original das janelas flutuantes
-        preserve_split = true; # Mantém a divisão da janela mesmo se você fechar
-      };
-
-      master = {
-        new_status = "master"; # Novas janelas viram a janela principal
-        mfact = 0.5; # Divide a tela exatamente no meio (50%)
+      cursor = {
+        no_warps = false;
+        inactive_timeout = 0;
       };
 
       windowrulev2 = [
-        # Faz as janelas de configuração flutuarem
+        # Regras de flutuação e centralização
         "float, class:(org.pulseaudio.pavucontrol)"
         "float, class:(nm-connection-editor)"
         "float, class:(waypaper)"
-        # Define um tamanho padrão para elas
         "size 700 500, class:(org.pulseaudio.pavucontrol)"
         "size 600 500, class:(nm-connection-editor)"
         "size 900 600, class:(waypaper)"
-        # Centraliza na tela
         "center, class:(org.pulseaudio.pavucontrol)"
         "center, class:(nm-connection-editor)"
         "center, class:(waypaper)"
-        # Vesktop special workspace
+        
+        # VS Code no Workspace 2
+        "workspace 2, class:^(code-url-handler)$"
+        "workspace 2, class:^(Code)$"
+        "workspace 2, class:^(code-insiders)$"
+
+        # Vesktop (Discord) Special Workspace
         "workspace special:discord, class:(vesktop)"
         "size 80% 85%, class:(vesktop)"
         "center, class:(vesktop)"
       ];
 
       exec-once = [
-        "swww-daemon" #Inicia motor de wallpaper
-        "nm-applet --indicator" #Ícone de rede na bandeja
-        "swaync" # Inicia centro de notificação
-        "waybar" # Inicia a barra
-        "numlockx on"
+        "swww-daemon"
+        "nm-applet --indicator"
+        "swaync"
+        "waybar"
         "sleep 10 && vesktop --start-minimized"
+        "hyprctl dispatch dpms on"
       ];
+
+      misc = {
+        mouse_move_enables_dpms = true;
+        key_press_enables_dpms = true;
+        focus_on_activate = true;
+      };
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
+
+      master = {
+        new_status = "master";
+        mfact = 0.5;
+      };
     };
   };
 }

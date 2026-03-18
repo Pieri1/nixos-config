@@ -14,6 +14,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelParams = [ 
+    "usbcore.autosuspend=-1" 
+    "psmouse.synaptics_intertouch=0" # Melhora compatibilidade de periféricos em laptops
+  ];
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ohci_pci" "ehci_pci" "usbhid" "usb_storage" ];
+
   networking.hostName = "pieri-notebook"; # Define your hostname.
 
   # Configure network proxy if necessary
@@ -23,8 +30,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  # Set your time zone.:
   time.timeZone = "America/Sao_Paulo";
+
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -47,6 +55,19 @@
     variant = "";
   };
 
+  services.xserver.displayManager.setupCommands = ''
+    # Isso força o X11 a priorizar o HDMI se ele estiver plugado
+    ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-A-1 --primary --mode 1920x1080 --rate 75 --output eDP-1 --off || ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --auto
+  '';
+  
+  services.logind.settings = {
+    Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitchDocked = "ignore";
+    };
+  };
+
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
@@ -59,6 +80,7 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.xserver.libinput.enable = true; # Garante drivers genéricos estáveis para o KVM
   xdg.portal = {
     
     enable = true;

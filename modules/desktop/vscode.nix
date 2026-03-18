@@ -18,10 +18,10 @@
       "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace'";
       "workbench.colorTheme" = "Catppuccin Mocha";
       "editor.semanticHighlighting.enabled" = true;
-      "terminal.integrated.defaultProfile.linux" = "zsh";
+      "terminal.integrated.defaultProfile.linux" = "zsh"; # Já usando seu Zsh de elite
       "window.titleBarStyle" = "custom";
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
-    };
+      "nix.serverPath" = "nil"; # Servidor de linguagem para Nix
+    };  
   };
 }
