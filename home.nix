@@ -45,7 +45,7 @@
                 grimblast # Para prints e captura de tela rápida
                 numlockx
                 nil #Servidor de linguagem pra nix
-                socat #Listener de Evento
+                wasistlos
 
                 # Som
                 pavucontrol # Interface de áudio (Mixer)

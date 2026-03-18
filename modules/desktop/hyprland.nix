@@ -68,6 +68,7 @@ in
         ", XF86AudioLowerVolume, exec, pamixer -d 5"
         ", XF86AudioMute, exec, pamixer -t" # Corrigido o erro de digitação 'paximer'
         "$mainMod, D, togglespecialworkspace, discord"
+        "$mainMod, W, togglespecialworkspace, whatsapp"
       ];
 
       bindm = [
@@ -170,6 +171,11 @@ in
         "workspace special:discord, class:(vesktop)"
         "size 80% 85%, class:(vesktop)"
         "center, class:(vesktop)"
+
+        # WhatsApp no Special Workspace
+        "workspace special:whatsapp, class:(wasistlos)"
+        "size 80% 85%, class:(wasistlos)"
+        "center, class:(wasistlos)"
       ];
 
       exec-once = [
@@ -177,7 +183,8 @@ in
         "nm-applet --indicator"
         "swaync"
         "waybar"
-        "sleep 10 && vesktop --start-minimized"
+        "sleep 10 && vesktop"
+        "sleep 10 && wasistlos"
         "hyprctl dispatch dpms on"
       ];
 
