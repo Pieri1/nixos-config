@@ -37,19 +37,19 @@
         "buttons-grid" = {
           "actions" = [
             {
-              "label" = "\uf011";
+              "label" = "Logout";
               "command" = "wlogout";
             }
             {
-              "label" = "\uf1eb";
+              "label" = "Rede";
               "command" = "nm-connection-editor";
             }
             {
-              "label" = "\uf028";
+              "label" = "Audio";
               "command" = "pavucontrol";
             }
             {
-              "label" = "\uf03e";
+              "label" = "Wallpaper";
 
               "command" = "waypaper";
             }
