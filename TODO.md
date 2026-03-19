@@ -9,7 +9,7 @@ Medium Priority
 Low Priority
 - NumLock starts on
 - F buttons working
--
+- Code and alerts opening on workspace 2
 Done:
 - Basic UI
 - Discord

@@ -18,6 +18,7 @@
     # --- Diagnóstico de Tráfego ---
     bandwhich   # Mostra em tempo real qual processo (ex: um app específico ou o sistema) está sugando sua banda no momento.
     mtr         # Junta o 'ping' e o 'traceroute' numa tela só, atualizando em tempo real. Ótimo para achar onde a internet está gargalando.
+    traceroute
 
     # --- Mapeamento e APIs ---
     nmap        # O clássico escaneador de portas.

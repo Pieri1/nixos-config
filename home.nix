@@ -57,6 +57,10 @@
                 # Wallpaper
                 waypaper # Interface visual para trocar wallpaper
                 swww # Motor que renderiza o wallpaper"
+
+                # Ferramentas de Verificação de Disco
+                duf # Geral por disco
+                ncdu # Mais lento porémm mais detalhista
 	];
 
 	programs.home-manager.enable = true;
