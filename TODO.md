@@ -4,7 +4,7 @@ High Priority
 - 
 Medium Priority
 - Better Layout/Theme/UI
--
+- Discord themed automated
 - 
 Low Priority
 - NumLock starts on

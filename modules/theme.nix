@@ -47,6 +47,7 @@
     hyprland.enable = true;
     kitty.enable = true;
     vscode.enable = true;
+    vesktop.enable = true;
     waybar.enable = true;
   };
 }

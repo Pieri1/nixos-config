@@ -64,30 +64,5 @@
         };
       };
     };
-
-    style = ''
-      * {
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 14px;
-        border: none;
-        border-radius: 0;
-      }
-      window#waybar {
-        background: rgba(30, 30, 46, 0.9);
-        color: #cdd6f4;
-        border-bottom: 2px solid #89b4fa;
-      }
-      #workspaces button {
-        padding: 0 5px;
-        color: #89b4fa;
-      }
-      #workspaces button.active {
-        color: #f5c2e7;
-        background-color: #313244;
-      }
-      #clock, #baterry, #network, #pulseaudio, #custom-wallpaper, #custom-settings{
-        padding: 0 10px;
-      }
-    '';
   };
 }
