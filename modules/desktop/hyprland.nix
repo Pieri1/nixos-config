@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   handle_lid = pkgs.writeShellScriptBin "handle_lid" ''
@@ -22,6 +22,7 @@ let
         ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1, preferred, auto, 1"
     fi
   '';
+  
 in
 {
   wayland.windowManager.hyprland = {
@@ -66,7 +67,7 @@ in
         "$mainMod, mouse_up, workspace, e-1"
         ", XF86AudioRaiseVolume, exec, pamixer -i 5"
         ", XF86AudioLowerVolume, exec, pamixer -d 5"
-        ", XF86AudioMute, exec, pamixer -t" # Corrigido o erro de digitação 'paximer'
+        ", XF86AudioMute, exec, pamixer -t"
         "$mainMod, D, togglespecialworkspace, discord"
         "$mainMod, W, togglespecialworkspace, whatsapp"
       ];
@@ -113,8 +114,6 @@ in
         gaps_in = 6;
         gaps_out = 12;
         border_size = 2;
-        "col.active_border" = "rgba(89b4faff) rgba(cba6f7ff) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
 
@@ -124,7 +123,6 @@ in
           enabled = true;
           range = 4;
           render_power = 3;
-          color = "rgba(1a1a1eee)";
         };
         blur = {
           enabled = true;
@@ -161,11 +159,6 @@ in
         "center, class:(org.pulseaudio.pavucontrol)"
         "center, class:(nm-connection-editor)"
         "center, class:(waypaper)"
-        
-        # VS Code no Workspace 2
-        "workspace 2, class:^(code-url-handler)$"
-        "workspace 2, class:^(Code)$"
-        "workspace 2, class:^(code-insiders)$"
 
         # Vesktop (Discord) Special Workspace
         "workspace special:discord, class:(vesktop)"

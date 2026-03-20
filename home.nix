@@ -1,7 +1,8 @@
-{config, pkgs, ... }:
+{pkgs, ... }:
 
 {
 	imports = [
+		./modules/theme.nix
 		./modules/shell/zsh.nix
 		./modules/shell/git.nix
 		./modules/shell/nvim.nix
@@ -18,8 +19,6 @@
 	home.username = "pieri";
 	home.homeDirectory = "/home/pieri";
         home.stateVersion = "24.11";
-        
-        nixpkgs.config.allowUnfree = true;
 
         services.swaync = {
           enable = true;
