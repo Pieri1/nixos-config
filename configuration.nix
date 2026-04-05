@@ -100,7 +100,9 @@
     description = "João Pieri";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "docker" "video" "wireshark" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [
+      python311 # Instala apenas o binário do Python 3.11 para o seu usuário
+    ];
   };
 
   # List packages installed in system profile. To search, run:

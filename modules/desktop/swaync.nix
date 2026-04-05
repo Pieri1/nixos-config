@@ -35,11 +35,8 @@
           "text" = "Não pertube";
         };
         "buttons-grid" = {
+          "columns" = 4;
           "actions" = [
-            {
-              "label" = "Logout";
-              "command" = "wlogout";
-            }
             {
               "label" = "Rede";
               "command" = "nm-connection-editor";
@@ -50,43 +47,28 @@
             }
             {
               "label" = "Wallpaper";
-
               "command" = "waypaper";
+            }
+            {
+              "label" = "󰐥";
+              "command" = "systemctl poweroff";
+            }
+            {
+              "label" = "󰜉";
+              "command" = "systemctl reboot";
+            }
+            {
+              "label" = "󰍃";
+              "command" = "hyprctl dispatch exit";
+            }
+            {
+              "label" = "󰒲";
+              "command" = "systemctl suspend";
             }
           ];
         };
       };
     };
 
-    style = ''
-      .notification-row { outline: none; }
-      .notification-content {
-        background: #1e1e2e;
-        color: #cdd6f4;
-        border: 1px solid #89b4fa;
-        border-radius: 10px;
-        margin: 5px;
-        padding: 10px;
-      }
-      .control-center {
-        background: rgba(30, 30, 46, 0.95);
-        border: 1px solid #89b4fa;
-        border-radius: 15px;
-        color: #cdd6f4;
-        padding: 15px;
-      }
-      .widget-buttons-grid button {
-        background: #313244;
-        border-radius: 10px;
-        color: #89b4fa;
-        margin: 5px;
-        padding: 10px;
-        font-size: 20px;
-      }
-      .widget-buttons-grid button:hover {
-        background: #45475a;
-        color: #f5c2e7:
-      }
-    '';
   };
 }
