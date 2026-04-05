@@ -8,9 +8,10 @@
   # stylix.image = ./images/wallpaper/wallpaper.png;
 
   # 2) Tema fixo base16:
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
 
   # Lista pronta (Ctrl+C / Ctrl+V):
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
@@ -49,5 +50,6 @@
     vscode.enable = true;
     vesktop.enable = true;
     waybar.enable = true;
+    gtk.enable = true;
   };
 }

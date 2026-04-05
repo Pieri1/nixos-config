@@ -18,9 +18,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelParams = [ 
+    "quiet"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
+    "boot.shell_on_fail"
     "usbcore.autosuspend=-1" 
     "psmouse.synaptics_intertouch=0" # Melhora compatibilidade de periféricos em laptops
   ];
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ohci_pci" "ehci_pci" "usbhid" "usb_storage" ];
 
@@ -57,11 +64,6 @@
     layout = "br";
     variant = "";
   };
-
-  services.xserver.displayManager.setupCommands = ''
-    # Isso força o X11 a priorizar o HDMI se ele estiver plugado
-    ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-A-1 --primary --mode 1920x1080 --rate 75 --output eDP-1 --off || ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --auto
-  '';
   
   services.logind.settings = {
     Login = {
@@ -81,8 +83,6 @@
     xwayland.enable = true;
   };
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
   services.xserver.libinput.enable = true; # Garante drivers genéricos estáveis para o KVM
   xdg.portal = {
     
@@ -99,7 +99,7 @@
     isNormalUser = true;
     description = "João Pieri";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "wireshark" ];
     packages = with pkgs; [];
   };
 
@@ -114,6 +114,22 @@
 
   # docker
   virtualisation.docker.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        # Comando limpo e direto
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd Hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Garante que o usuário do login tenha acesso ao vídeo
+  users.extraUsers.greeter = {
+    extraGroups = [ "video" "render" ];
+  };
 
   #unfree software
   nixpkgs.config.allowUnfree = true;

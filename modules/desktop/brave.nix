@@ -12,6 +12,8 @@
         "--ignore-gpu-blocklist"
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
+        "--force-dark-mode"
+        "--enable-features=WebUIDarkMode"
       ];
     };
   };

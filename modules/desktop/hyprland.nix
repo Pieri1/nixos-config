@@ -174,6 +174,8 @@ in
         "workspace special:whatsapp, class:(wasistlos)"
         "size 80% 85%, class:(wasistlos)"
         "center, class:(wasistlos)"
+
+        "opacity 0.8 0.8, class:(vesktop)"
       ];
 
       exec-once = [
