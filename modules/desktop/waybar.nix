@@ -12,7 +12,7 @@
 
         modules-left = [ "hyprland/workspaces"];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "custom/wallpaper" "pulseaudio" "network" "battery" "clock" "custom/settings" ];
+        modules-right = [ "backlight" "custom/wallpaper" "pulseaudio" "network" "battery" "clock" "custom/settings" ];
 
         "hyprland/workspaces" = {
           on-click = "activate";
@@ -41,6 +41,13 @@
           format-wifi = "WiFi {essid}";
           format-disconnected = "WiFi Desconectado";
           on-click = "nm-connection-editor";
+        };
+
+        "backlight" = {
+          "format" = "{icon}  {percent}%";
+          "format-icons" = [ "󰃞" "󰃟" "󰃠" ];
+          "on-scroll-up" = "brightnessctl set 1%+";
+          "on-scroll-down" = "brightnessctl set 1%-";
         };
 
         "pulseaudio" = {

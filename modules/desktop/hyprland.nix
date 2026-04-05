@@ -77,6 +77,11 @@ in
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      binde = [
+        ", XF86MonBrightnessUp, exec, brightnessctl set 1%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 1%-"
+      ];
+
       # Gatilhos de Hardware (Lid Switch)
       bindl = [
         # switch:on = Tampa Fechada (State 1)

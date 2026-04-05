@@ -99,7 +99,7 @@
     isNormalUser = true;
     description = "João Pieri";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" ];
     packages = with pkgs; [];
   };
 
@@ -109,6 +109,7 @@
   environment.systemPackages = with pkgs; [
     curl
     wget
+    brightnessctl
   ];
 
   # docker

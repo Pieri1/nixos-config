@@ -20,6 +20,11 @@
 	home.homeDirectory = "/home/pieri";
         home.stateVersion = "24.11";
 
+        programs.direnv = {
+                enable = true;
+                nix-direnv.enable = true;
+        };
+
         services.swaync = {
           enable = true;
         };
