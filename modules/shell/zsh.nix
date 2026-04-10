@@ -9,6 +9,7 @@
 
 		shellAliases = {
 			sysup = "sudo nixos-rebuild switch --flake ~/nixos-config#pieri-notebook";
+			sysref = "~/nixos-config/update.sh";
 		};
 
 		oh-my-zsh = {
