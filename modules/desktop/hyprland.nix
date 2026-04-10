@@ -22,6 +22,64 @@ let
         ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1, preferred, auto, 1"
     fi
   '';
+
+  keyboard_backlight = pkgs.writeShellScriptBin "keyboard_backlight" ''
+    action="$1"
+    shopt -s nullglob
+    devices=(/sys/class/leds/*::scrolllock)
+
+    if [ ''${#devices[@]} -eq 0 ]; then
+      ${pkgs.libnotify}/bin/notify-send "Keyboard light" "Nenhum dispositivo *::scrolllock encontrado."
+      exit 1
+    fi
+
+    first_device_name="$(basename "''${devices[0]}")"
+    max="$(${pkgs.brightnessctl}/bin/brightnessctl -d "$first_device_name" max)"
+    any_on=0
+    for led in "''${devices[@]}"; do
+      device_name="$(basename "$led")"
+      current="$(${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" get)"
+      if [ "$current" -gt 0 ]; then
+        any_on=1
+      fi
+    done
+
+    case "$action" in
+      up)
+        for led in "''${devices[@]}"; do
+          device_name="$(basename "$led")"
+          if [ "$max" -le 1 ]; then
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set 1 >/dev/null
+          else
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set +1 >/dev/null
+          fi
+        done
+        ;;
+      down)
+        for led in "''${devices[@]}"; do
+          device_name="$(basename "$led")"
+          if [ "$max" -le 1 ]; then
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set 0 >/dev/null
+          else
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set 1- >/dev/null
+          fi
+        done
+        ;;
+      toggle)
+        for led in "''${devices[@]}"; do
+          device_name="$(basename "$led")"
+          if [ "$any_on" -gt 0 ]; then
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set 0 >/dev/null
+          else
+            ${pkgs.brightnessctl}/bin/brightnessctl -d "$device_name" set "$max" >/dev/null
+          fi
+        done
+        ;;
+      *)
+        exit 1
+        ;;
+    esac
+  '';
   
 in
 {
@@ -34,9 +92,9 @@ in
         "$mainMod, Q, exec, kitty"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, nautilus"
         "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, wofi --show drun"
+        "$mainMod, R, exec, wofi --show drun --allow-images --allow-markup --image-size 28"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
         "$mainMod, left, movefocus, l"
@@ -65,8 +123,7 @@ in
         "$mainMod SHIFT, 0, movetoworkspace, 10"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-        ", XF86AudioLowerVolume, exec, pamixer -d 5"
+        ", code:78, exec, ${keyboard_backlight}/bin/keyboard_backlight up"
         ", XF86AudioMute, exec, pamixer -t"
         "$mainMod, D, togglespecialworkspace, discord"
         "$mainMod, W, togglespecialworkspace, whatsapp"
@@ -78,8 +135,13 @@ in
       ];
 
       binde = [
+        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+        ", XF86AudioLowerVolume, exec, pamixer -d 5"
         ", XF86MonBrightnessUp, exec, brightnessctl set 1%+"
         ", XF86MonBrightnessDown, exec, brightnessctl set 1%-"
+        ", XF86KbdLightOnOff, exec, ${keyboard_backlight}/bin/keyboard_backlight up"
+        ", XF86KbdBrightnessUp, exec, ${keyboard_backlight}/bin/keyboard_backlight up"
+        ", XF86KbdBrightnessDown, exec, ${keyboard_backlight}/bin/keyboard_backlight down"
       ];
 
       # Gatilhos de Hardware (Lid Switch)
@@ -113,6 +175,11 @@ in
         "3, monitor:HDMI-A-1"
         "4, monitor:HDMI-A-1"
         "5, monitor:HDMI-A-1"
+        "6, monitor:HDMI-A-1"
+        "7, monitor:HDMI-A-1"
+        "8, monitor:HDMI-A-1"
+        "9, monitor:HDMI-A-1"
+        "10, monitor:HDMI-A-1"
       ];
 
       general = {
@@ -175,6 +242,10 @@ in
         "size 80% 85%, class:(wasistlos)"
         "center, class:(wasistlos)"
 
+        # Steam
+        "stayfocused, title:^()$,class:^(steam)$"
+        "minsize 1 1, title:^()$,class:^(steam)$"
+
         "opacity 0.8 0.8, class:(vesktop)"
       ];
 
@@ -183,8 +254,6 @@ in
         "nm-applet --indicator"
         "swaync"
         "waybar"
-        "sleep 10 && vesktop"
-        "sleep 10 && wasistlos"
         "hyprctl dispatch dpms on"
       ];
 

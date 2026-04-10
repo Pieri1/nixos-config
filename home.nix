@@ -13,6 +13,7 @@
                 ./modules/desktop/waybar.nix
                 ./modules/desktop/swaync.nix
                 ./modules/desktop/discord.nix
+                ./modules/desktop/obsidian.nix
                 ./modules/desktop/vscode.nix
         ];
 
@@ -25,8 +26,9 @@
                 colors = config.lib.stylix.colors;
         in ''
                 * {
-                        font-family: "Noto Sans";
-                        font-size: 10pt;
+                        background-image: none;
+                        box-shadow: none;
+                        font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
                 }
 
                 @define-color base00 #${colors.base00};
@@ -260,13 +262,128 @@
                 }
         '';
 
+        xdg.configFile."wlogout/style.css".text = let
+                colors = config.lib.stylix.colors;
+        in ''
+                * {
+                        background-image: none;
+                        box-shadow: none;
+                        font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+                }
+
+                window {
+                        background-color: #${colors.base00}E6;
+                }
+
+                button {
+                        color: #${colors.base0B};
+                        background-color: #${colors.base01};
+                        border: 2px solid #${colors.base0B};
+                        border-radius: 14px;
+                        margin: 10px;
+                        padding: 18px;
+                        min-width: 200px;   /* Aumente um pouco aqui se a fonte for ficar gigante */
+                        min-height: 200px;  /* Aumente um pouco aqui também */
+                        line-height: 1.25;
+                        
+                        /* Coloque o tamanho da fonte DIRETAMENTE no botão */
+                        font-size: 120px; 
+                }
+
+                button:hover {
+                        background-color: #${colors.base02};
+                        border-color: #${colors.base0B};
+                }
+
+                button:focus,
+                button:active {
+                        background-color: #${colors.base0B};
+                        color: #${colors.base00};
+                        border-color: #${colors.base0B};
+                }
+
+                #logout {
+                        border-color: #${colors.base0B};
+                }
+
+                #lock {
+                        border-color: #${colors.base0B};
+                }
+
+                #suspend {
+                        border-color: #${colors.base0A};
+                }
+
+                #hibernate {
+                        border-color: #${colors.base0E};
+                }
+
+                #shutdown {
+                        border-color: #${colors.base08};
+                }
+
+                #reboot {
+                        border-color: #${colors.base09};
+                }
+        '';
+
+        xdg.configFile."wlogout/layout".text = builtins.concatStringsSep "\n" (
+                map builtins.toJSON [
+                        {
+                                label = "lock";
+                                text = "󰌾";
+                                action = "hyprlock";
+                                keybind = "l";
+                        }
+                        {
+                                label = "logout";
+                                text = "󰍃";
+                                action = "hyprctl dispatch exit";
+                                keybind = "e";
+                        }
+                        {
+                                label = "suspend";
+                                text = "󰤄";
+                                action = "systemctl suspend";
+                                keybind = "u";
+                        }
+                        {
+                                label = "hibernate";
+                                text = "󰒲";
+                                action = "systemctl hibernate";
+                                keybind = "h";
+                        }
+                        {
+                                label = "reboot";
+                                text = "󰜉";
+                                action = "systemctl reboot";
+                                keybind = "r";
+                        }
+                        {
+                                label = "shutdown";
+                                text = "⏻";
+                                action = "systemctl poweroff";
+                                keybind = "s";
+                        }
+                ]
+        );
+
         programs.direnv = {
                 enable = true;
                 nix-direnv.enable = true;
         };
 
         services.swaync = {
-          enable = true;
+                enable = true;
+        };
+
+        programs.wofi.settings = {
+                allow_images = true;
+                image_size = 28;
+        };
+
+        home.sessionVariables = {
+                SAL_USE_VCLPLUGIN = "gtk3";
         };
 
 	# Pacotes
@@ -274,8 +391,10 @@
                 kitty # Terminal
                 wofi # Menu de aplicativos
                 waybar # Barra superior
+                libreoffice # Suíte de escritório padrão
+                gnome-calendar # Calendário
                 libnotify # Notificações
-                kdePackages.dolphin # Gerenciador de arquivos
+                nautilus # Gerenciador de arquivos
 		wget
 		curl
 		htop
@@ -302,6 +421,8 @@
                 # Wallpaper
                 waypaper # Interface visual para trocar wallpaper
                 swww # Motor que renderiza o wallpaper"
+                hyprlock # Lock screen para Hyprland
+                wlogout # Menu de energia
 
                 # Ferramentas de Verificação de Disco
                 duf # Geral por disco

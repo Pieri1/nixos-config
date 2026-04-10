@@ -19,6 +19,7 @@
 
       widgets = [
         "buttons-grid"
+        "volume"
         "mpris"
         "title"
         "dnd"
@@ -38,15 +39,15 @@
           "columns" = 4;
           "actions" = [
             {
-              "label" = "Rede";
+              "label" = "󰈀";
               "command" = "nm-connection-editor";
             }
             {
-              "label" = "Audio";
+              "label" = "";
               "command" = "pavucontrol";
             }
             {
-              "label" = "Wallpaper";
+              "label" = "󰸉";
               "command" = "waypaper";
             }
             {
