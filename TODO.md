@@ -1,7 +1,8 @@
 High Priority
 - Power/Restart/Suspend button
 - Login Screen on external monitor
-- 
+- Fix light keyboard turning off
+- Fix icons size on power menu
 Medium Priority
 - Better Layout/Theme/UI
 - Discord themed automated
