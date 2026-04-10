@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
 
       # Módulos de Pacotes Opicionais:
+      ./modules/system/games.nix
       ./modules/system/networking-tools.nix
     ];
 
@@ -135,6 +136,19 @@
 
   #unfree software
   nixpkgs.config.allowUnfree = true;
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    openssl
+    bzip2
+    xz
+    libffi
+    sqlite
+    ncurses
+    readline
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
