@@ -1,17 +1,14 @@
 High Priority
-- Power/Restart/Suspend button
-- Login Screen on external monitor
-- Fix light keyboard turning off
-- Fix icons size on power menu
+- Fix light keyboard turning off (Tried medium)
+- Fix icons size on power menu (Tried medium)
 Medium Priority
-- Better Layout/Theme/UI
-- Discord themed automated
-- 
+- Docker
 Low Priority
-- NumLock starts on
-- F buttons working
-- Code and alerts opening on workspace 2
+- Discord themed automated (Hard)
+- NumLock starts on (Tried a lot)
+- F buttons working (Partially made)
 Done:
+- Power/Restart/Suspend button
 - Basic UI
 - Discord
 - Whatsapp
@@ -23,3 +20,10 @@ Done:
 - Audio
 - Wallpaper
 - Networking modular tools
+- Disk Tools
+- Better Layout/Theme/UI
+- Devspaces
+- Login Screen on external monitor and stylish
+- Steam and game package
+- Cleanup script
+- Obsidian

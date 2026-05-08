@@ -384,6 +384,7 @@
 
         home.sessionVariables = {
                 SAL_USE_VCLPLUGIN = "gtk3";
+                NIXOS_OZONE_WL = "1";
         };
 
 	# Pacotes
@@ -405,11 +406,20 @@
                 noto-fonts-color-emoji
                 font-awesome
                 xdg-desktop-portal-hyprland
-                grimblast # Para prints e captura de tela rápida
                 numlockx
                 nil #Servidor de linguagem pra nix
                 wasistlos
-                
+                wev
+                file
+
+                # Para prints
+                grimblast
+                grim
+                slurp
+                wl-clipboard
+                cliphist
+                wl-clip-persist
+
 
                 # Som
                 pavucontrol # Interface de áudio (Mixer)

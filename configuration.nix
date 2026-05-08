@@ -12,6 +12,7 @@
       # Módulos de Pacotes Opicionais:
       ./modules/system/games.nix
       ./modules/system/networking-tools.nix
+      ./modules/system/cloud-tools.nix
     ];
 
   # Bootloader.

@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [
     # --- Google Cloud Platform ---
     google-cloud-sdk      # CLI oficial do GCP (gcloud, gsutil, bq)
-    google-cloud-cli      # Alternativa moderna (mais rápida em alguns casos)
 
     # --- Containerização e Orquestração ---
     docker                # Para rodar containers locais
@@ -19,26 +18,17 @@
     terraform             # IaC pra provisionar recursos GCP
     pulumi                # IaC alternativa (Python/Go/TS)
 
-    # --- Monitoramento e Logging ---
-    google-cloud-go       # SDK Go oficial (se for programar com Go)
-    grafana-loki          # Logging agregado (compatível com GCP Cloud Logging)
-
     # --- API Testing e Desenvolvimento ---
     grpcurl               # Cliente CLI pra testar gRPC APIs
-    protobuf              # Protocol Buffers (usado em GCP)
     buf                   # Gerenciador de proto files
-
     # --- Utilitários Gerais ---
     jq                    # Parser JSON (essencial pra outputs do gcloud)
     yq                    # Parser YAML (pra arquivos Kubernetes/Terraform)
-    aws-cli               # Pra comparar/testar também em AWS se precisar
-    azure-cli             # Mesmo para Azure
     fzf                   # Fuzzy finder (útil pra buscar projetos GCP)
     tmux                  # Multiplexer de terminal (pra estudar vários shells)
 
     # --- Segurança ---
     openssl               # TLS/SSL (certificados GCP)
-    git-crypt             # Criptografia de secrets em git
   ];
 
   # Variáveis de ambiente úteis
