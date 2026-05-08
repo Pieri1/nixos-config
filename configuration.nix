@@ -12,7 +12,12 @@
       # Módulos de Pacotes Opicionais:
       ./modules/system/games.nix
       ./modules/system/networking-tools.nix
-      ./modules/system/cloud-tools.nix
+
+      # Cloud e DevOps (descomente os que quiser):
+      # ./modules/system/devops-tools.nix    # Docker, Kubernetes local, utilidades
+      # ./modules/system/gcp-tools.nix       # Google Cloud Platform
+      # ./modules/system/aws-tools.nix       # Amazon Web Services
+      # ./modules/system/azure-tools.nix     # Microsoft Azure
     ];
 
   # Bootloader.
