@@ -28,5 +28,8 @@
     # --- DNS e IPs ---
     dnsutils    # Traz o comando 'dig', essencial para ver como os domínios estão resolvendo.
     ipcalc      # Calculadora rápida de sub-redes e máscaras.
+
+    # --- Simuladores de Rede ---
+    cisco-packet-tracer_8 # Simulador de rede da Cisco, ótimo para estudar CCNA e CCNP.
   ];
 }

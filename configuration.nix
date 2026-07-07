@@ -14,8 +14,8 @@
       ./modules/system/networking-tools.nix
 
       # Cloud e DevOps (descomente os que quiser):
-      # ./modules/system/devops-tools.nix    # Docker, Kubernetes local, utilidades
-      # ./modules/system/gcp-tools.nix       # Google Cloud Platform
+      ./modules/system/devops-tools.nix    # Docker, Kubernetes local, utilidades
+      ./modules/system/gcp-tools.nix       # Google Cloud Platform
       # ./modules/system/aws-tools.nix       # Amazon Web Services
       # ./modules/system/azure-tools.nix     # Microsoft Azure
     ];
@@ -142,6 +142,9 @@
 
   #unfree software
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "ciscoPacketTracer8-8.2.2"
+  ];
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

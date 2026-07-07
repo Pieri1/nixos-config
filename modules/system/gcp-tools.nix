@@ -8,10 +8,10 @@
 
     # --- Kubernetes e container orchestration ---
     kubectl               # Gerenciar GKE
-    helm                  # Package manager Kubernetes
+    kubernetes-helm       # Helm (Kubernetes)
 
     # --- Infraestrutura como Código ---
-    terraform             # Provisionar recursos GCP
+    opentofu              # Provisionar recursos GCP (livre)
 
     # --- API Testing ---
     grpcurl               # Cliente CLI para gRPC

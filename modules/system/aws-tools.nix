@@ -7,7 +7,7 @@
     awscli2               # CLI oficial AWS
 
     # --- Infraestrutura como Código ---
-    terraform             # IaC (compartilhado com GCP/Azure)
+    opentofu              # IaC livre (fork do Terraform)
 
     # --- Utilitários AWS ---
     aws-vault             # Gerenciar credenciais AWS com segurança

@@ -7,7 +7,7 @@
     azure-cli             # CLI oficial Azure
 
     # --- Infraestrutura como Código ---
-    terraform             # IaC (compartilhado com GCP/AWS)
+    opentofu              # IaC livre (fork do Terraform)
     bicep                 # Linguagem IaC alternativa Azure
   ];
 
